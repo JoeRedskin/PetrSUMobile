@@ -1,4 +1,4 @@
-package com.example.petrsumobile;
+package com.example.petrsumobile.news;
 
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import androidx.lifecycle.ViewModelProviders;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.example.petrsumobile.R;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

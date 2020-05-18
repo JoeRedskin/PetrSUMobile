@@ -1,4 +1,4 @@
-package com.example.petrsumobile;
+package com.example.petrsumobile.news;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

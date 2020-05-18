@@ -1,4 +1,4 @@
-package com.example.petrsumobile;
+package com.example.petrsumobile.news;
 
 
 import android.content.Context;
@@ -14,6 +14,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.example.petrsumobile.R;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -74,13 +75,10 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.MyViewHolder> 
         textViewDescription.setText(newsList.get(listPosition).getNewsDescription());
         textViewDate.setText(formattedDate);
         String imageViewURL = newsList.get(listPosition).getNewsImageURL();
-//        textViewDate.setImageResource(dataSet.get(listPosition).getImage());
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*Toast.makeText(view.getContext(), listPosition + " card", Toast.LENGTH_SHORT).show();*/
-
                 AppCompatActivity activity = (AppCompatActivity) view.getContext();
                 activity.getSupportFragmentManager().beginTransaction();
 

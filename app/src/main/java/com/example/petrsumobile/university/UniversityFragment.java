@@ -1,4 +1,4 @@
-package com.example.petrsumobile;
+package com.example.petrsumobile.university;
 
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -6,14 +6,15 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import com.example.petrsumobile.R;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ScheduleFragment extends Fragment {
+public class UniversityFragment extends Fragment {
 
-    public ScheduleFragment() {
+    public UniversityFragment() {
         // Required empty public constructor
     }
 
@@ -23,8 +24,8 @@ public class ScheduleFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Расписание");
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Навигация");
 
-        return inflater.inflate(R.layout.fragment_schedule, container, false);
+        return inflater.inflate(R.layout.fragment_university, container, false);
     }
 }

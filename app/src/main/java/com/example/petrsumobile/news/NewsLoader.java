@@ -1,8 +1,9 @@
-package com.example.petrsumobile;
+package com.example.petrsumobile.news;
 
 import android.content.Context;
 import android.os.AsyncTask;
 import androidx.loader.content.AsyncTaskLoader;
+import com.example.petrsumobile.DataQuery;
 
 import java.util.ArrayList;
 
