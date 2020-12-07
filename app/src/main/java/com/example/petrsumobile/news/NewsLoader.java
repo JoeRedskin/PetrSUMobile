@@ -22,10 +22,6 @@ public class NewsLoader extends AsyncTaskLoader<ArrayList<News>> {
 
     @Override
     public ArrayList<News> loadInBackground() {
-
-        // Perform the network request, parse the response, and extract a list of earthquakes.
-        ArrayList<News> newsArrayList = DataQuery.fetchNewsData();
-        return newsArrayList;
+        return DataQuery.fetchNewsData();
     }
-
 }

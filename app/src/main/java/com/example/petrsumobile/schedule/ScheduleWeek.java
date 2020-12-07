@@ -3,7 +3,7 @@ package com.example.petrsumobile.schedule;
 
 import java.util.ArrayList;
 
-public class ScheduleWeekday {
+public class ScheduleWeek {
 
     public enum STATE {
         CLOSED,
@@ -11,11 +11,11 @@ public class ScheduleWeekday {
     }
     STATE state = STATE.CLOSED;
     private ArrayList<Schedule> scheduleArrayList;
-    private String nameWeekday;
+    private String nameWeek;
 
-    public ScheduleWeekday(ArrayList<Schedule> scheduleArrayList, String nameWeekday){
+    public ScheduleWeek(ArrayList<Schedule> scheduleArrayList, String nameWeek){
         this.scheduleArrayList = scheduleArrayList;
-        this.nameWeekday = nameWeekday;
+        this.nameWeek = nameWeek;
     }
 
 
@@ -23,7 +23,7 @@ public class ScheduleWeekday {
         return scheduleArrayList;
     }
 
-    public String getNameWeekday() {
-        return nameWeekday;
+    public String getNameWeek() {
+        return nameWeek;
     }
 }

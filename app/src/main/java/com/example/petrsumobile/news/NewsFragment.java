@@ -27,7 +27,7 @@ public class NewsFragment extends Fragment implements LoaderManager.LoaderCallba
 
     private static RecyclerView.Adapter adapter;
     private static RecyclerView recyclerView;
-    private static ArrayList<News> newsList = new ArrayList<News>();
+    private static ArrayList<News> newsList = new ArrayList<>();
     private RecyclerView.LayoutManager layoutManager;
     private NewsViewModel newsViewModel;
 
@@ -36,6 +36,10 @@ public class NewsFragment extends Fragment implements LoaderManager.LoaderCallba
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        updateRecyclerView();
+    }
+
+    public void updateRecyclerView(){
         newsViewModel = ViewModelProviders.of(this.getActivity()).get(NewsViewModel.class);
 
         recyclerView = (RecyclerView) this.getActivity().findViewById(R.id.recycle_view_news);
@@ -51,7 +55,6 @@ public class NewsFragment extends Fragment implements LoaderManager.LoaderCallba
             }
         });
         recyclerView.setAdapter(adapter);
-
     }
 
     @Override
@@ -64,14 +67,16 @@ public class NewsFragment extends Fragment implements LoaderManager.LoaderCallba
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_news, container, false);
 
-
         //((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Новости");
 
-        LoaderManager loaderManager = getLoaderManager();
-        loaderManager.initLoader(NEWS_LOADER_ID, null, this);
-
+        initLoaderManager(NEWS_LOADER_ID);
         return view;
+    }
+
+    public void initLoaderManager(int loaderId){
+        LoaderManager loaderManager = getLoaderManager();
+        loaderManager.initLoader(loaderId, null, this);
     }
 
     @NonNull
@@ -82,19 +87,16 @@ public class NewsFragment extends Fragment implements LoaderManager.LoaderCallba
 
     @Override
     public void onLoadFinished(@NonNull Loader<ArrayList<News>> loader, ArrayList<News> data) {
-
         newsList.clear();
 
         if (data != null && !data.isEmpty()) {
             newsList.addAll(data);
             adapter.notifyDataSetChanged();
         }
-
     }
 
     @Override
     public void onLoaderReset(@NonNull Loader<ArrayList<News>> loader) {
-
         newsList.clear();
         adapter.notifyDataSetChanged();
     }

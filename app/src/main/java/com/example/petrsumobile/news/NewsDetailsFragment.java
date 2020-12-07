@@ -1,11 +1,9 @@
 package com.example.petrsumobile.news;
 
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
-import android.widget.Toolbar;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -14,7 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import androidx.lifecycle.ViewModelProviders;
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.petrsumobile.R;
 
 import java.text.SimpleDateFormat;
@@ -32,7 +29,6 @@ public class NewsDetailsFragment extends Fragment {
     ImageView imageView;
 
     public NewsDetailsFragment() {
-        // Required empty public constructor
     }
 
 
@@ -70,14 +66,12 @@ public class NewsDetailsFragment extends Fragment {
 
     public void displayDetails(News news){
 
-        String formattedDate = formatDate(news.getNewsDate());
-        String imageViewURL = news.getNewsImageURL();
+        String formattedDate = formatDate(news.getDate());
+        String imageViewURL = news.getImageUrl();
 
         textViewDateDetails.setText(formattedDate);
-        textViewTitleDetails.setText(news.getNewsTitle());
-        textViewDescriptionDetails.setText(news.getNewsDescription());
-
-
+        textViewTitleDetails.setText(news.getTitle());
+        textViewDescriptionDetails.setText(news.getDescription());
 
         Glide.with(this)
                 .load(imageViewURL)

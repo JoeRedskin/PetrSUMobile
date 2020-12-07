@@ -6,18 +6,18 @@ public class Schedule {
     private String startTime;
     private String endTime;
     private String lecturer;
-    private String name;
+    private String title;
     private String type;
     private Integer number;
 
     public Schedule(String classroom,String startTime,
                     String endTime,String lecturer,
-                    String name, String type, Integer number){
+                    String title, String type, Integer number){
         this.classroom = classroom;
         this.startTime = startTime;
         this.endTime = endTime;
         this.lecturer = lecturer;
-        this.name = name;
+        this.title = title;
         this.type = type;
         this.number = number;
     }
@@ -38,8 +38,8 @@ public class Schedule {
         return lecturer;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
     public String getType() {

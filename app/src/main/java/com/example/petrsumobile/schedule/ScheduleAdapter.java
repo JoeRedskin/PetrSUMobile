@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.petrsumobile.R;
@@ -17,21 +18,25 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.Schedu
 
     public static class ScheduleViewHolder extends RecyclerView.ViewHolder {
 
-        TextView textViewScheduleName;
-        TextView textViewScheduleNumber;
-        TextView textViewScheduleTime;
+        TextView textViewScheduleTitle;
+        TextView textViewScheduleTimeEnd;
+        TextView textViewScheduleTimeStart;
         TextView textViewScheduleType;
         TextView textViewScheduleLecturer;
         TextView textViewScheduleClassroom;
+        ImageButton showOnMapButton;
+        View lineView;
 
         public ScheduleViewHolder(View itemView) {
             super(itemView);
-            this.textViewScheduleName = (TextView) itemView.findViewById(R.id.textViewScheduleName);
-            this.textViewScheduleNumber = (TextView) itemView.findViewById(R.id.textViewScheduleNumber);
-            this.textViewScheduleTime = (TextView) itemView.findViewById(R.id.textViewScheduleTime);
+            this.textViewScheduleTitle = (TextView) itemView.findViewById(R.id.textViewScheduleTitle);
+            this.textViewScheduleTimeEnd = (TextView) itemView.findViewById(R.id.textViewScheduleTimeEnd);
+            this.textViewScheduleTimeStart = (TextView) itemView.findViewById(R.id.textViewScheduleTimeStart);
             this.textViewScheduleType = (TextView) itemView.findViewById(R.id.textViewScheduleType);
             this.textViewScheduleLecturer = (TextView) itemView.findViewById(R.id.textViewScheduleLecturer);
             this.textViewScheduleClassroom = (TextView) itemView.findViewById(R.id.textViewScheduleClassroom);
+            this.showOnMapButton = (ImageButton) itemView.findViewById(R.id.showOnMapButton);
+            this.lineView = (View) itemView.findViewById(R.id.lineView);
         }
     }
 
@@ -45,34 +50,64 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.Schedu
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.schedule_item, parent, false);
 
-        ScheduleAdapter.ScheduleViewHolder scheduleViewHolder = new ScheduleAdapter.ScheduleViewHolder(view);
-        return scheduleViewHolder;
+        return new ScheduleViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(final ScheduleAdapter.ScheduleViewHolder holder, final int listPosition) {
-
         Schedule schedule = scheduleArrayList.get(listPosition);
 
         TextView textViewScheduleClassroom = holder.textViewScheduleClassroom;
         TextView textViewScheduleLecturer = holder.textViewScheduleLecturer;
-        TextView textViewScheduleName = holder.textViewScheduleName;
-        TextView textViewScheduleNumber = holder.textViewScheduleNumber;
-        TextView textViewScheduleTime = holder.textViewScheduleTime;
+        TextView textViewScheduleTitle = holder.textViewScheduleTitle;
+        TextView textViewScheduleTimeEnd = holder.textViewScheduleTimeEnd;
+        TextView textViewScheduleTimeStart = holder.textViewScheduleTimeStart;
         TextView textViewScheduleType = holder.textViewScheduleType;
+        ImageButton showOnMapButton = holder.showOnMapButton;
+        View lineView = holder.lineView;
 
+
+//        String titleBefore = schedule.getTitle().toUpperCase();
+//        String[] titles = titleBefore.split(" ");
+//        StringBuilder titleAfter = new StringBuilder();
+//        for (String title : titles) {
+//            switch (title) {
+//                case "ЛАБОРАТОРНЫЕ":
+//                    titleAfter.append("Лаборарная работа ");
+//                    break;
+//                case "ЛЕКЦИИ":
+//                    titleAfter.append("Лекция ");
+//                    break;
+//                case "ДИСТАНТ":
+//                    titleAfter.append("Дистант ");
+//                    break;
+//                default:
+//                    titleAfter.append("ЛАБ");
+//                    break;
+//            }
+//        }
+        if (listPosition == scheduleArrayList.size()-1){
+            lineView.setVisibility(View.GONE);
+        } else {
+            lineView.setVisibility(View.VISIBLE);
+        }
+
+        if (schedule.getClassroom().equals("")){
+            textViewScheduleClassroom.setVisibility(View.GONE);
+            showOnMapButton.setVisibility(View.INVISIBLE);
+        } else {
+            textViewScheduleClassroom.setVisibility(View.VISIBLE);
+            //TODO: убрать эту строку
+            showOnMapButton.setVisibility(View.INVISIBLE);
+//            showOnMapButton.setVisibility(View.VISIBLE);
+        }
         textViewScheduleClassroom.setText(schedule.getClassroom());
         textViewScheduleLecturer.setText(schedule.getLecturer());
-        textViewScheduleName.setText(schedule.getName());
-        textViewScheduleNumber.setText("№" + Integer.toString(schedule.getNumber()));
-        textViewScheduleTime.setText(schedule.getStartTime() + " - " + schedule.getEndTime());
+        textViewScheduleTitle.setText(schedule.getTitle());
+        textViewScheduleTimeEnd.setText(schedule.getEndTime());
+        textViewScheduleTimeStart.setText(schedule.getStartTime());
         textViewScheduleType.setText(schedule.getType());
-
-        //Log.v("Tag",scheduleWeekdayArrayList.get(listPosition).getNameWeekday());
-
     }
-
-
 
     @Override
     public int getItemCount() {

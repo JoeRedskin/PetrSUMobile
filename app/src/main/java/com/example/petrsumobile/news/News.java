@@ -1,8 +1,5 @@
 package com.example.petrsumobile.news;
 
-import android.media.Image;
-
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class News {
@@ -11,40 +8,30 @@ public class News {
     private String description;
     private String link;
     private Date date;
-    private String imageURL;
+    private String imageUrl;
 
-    public News(String title, String description, Date date, String link, String imageURL){
+    public News(String title, String description, Date date, String link, String imageUrl){
         this.title= title;
         this.description = description;
         this.link = link;
         this.date = date;
-        this.imageURL = imageURL;
+        this.imageUrl = imageUrl;
     }
 
-    public String getNewsTitle(){
+    public String getTitle(){
         return title;
     }
-    public String getNewsDescription(){
+    public String getDescription(){
         return description;
     }
-    public String getNewsLink(){
+    public String getLink(){
         return link;
     }
-    public Date getNewsDate(){
+    public Date getDate(){
         return date;
     }
-    public String getNewsImageURL(){
-        return imageURL;
+    public String getImageUrl(){
+        return imageUrl;
     }
-
-//    @Override
-//    public String toString() {
-//
-//        SimpleDateFormat sdf = new SimpleDateFormat("d MMM, yyyy");
-//
-//        String result = sdf.format(this.getNewsDate());
-//        return result;
-//    }
-
 
 }
