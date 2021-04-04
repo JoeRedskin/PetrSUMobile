@@ -1,6 +1,8 @@
 package com.example.petrsumobile;
 
 import android.app.ActionBar;
+import android.content.Intent;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -12,20 +14,25 @@ import android.view.View;
 import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import com.example.petrsumobile.news.NewsFragment;
+import com.example.petrsumobile.schedule.ScheduleFragment;
+import com.example.petrsumobile.schedule.SettingsActivity;
+import com.example.petrsumobile.university.UniversityFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 
 public class MainActivity extends AppCompatActivity {
 
     //private ActionBar toolbar;
-    private Toolbar toolbar;
+    //private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        loadFragment(new NewsFragment());
+        //loadFragment(new NewsFragment());
+        loadFragment(new ScheduleFragment());
 
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {

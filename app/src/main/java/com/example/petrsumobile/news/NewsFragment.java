@@ -1,4 +1,4 @@
-package com.example.petrsumobile;
+package com.example.petrsumobile.news;
 
 import android.os.Bundle;
 import android.widget.Toast;
@@ -15,6 +15,7 @@ import androidx.loader.content.Loader;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import com.example.petrsumobile.R;
 
 import java.util.ArrayList;
 
@@ -26,25 +27,21 @@ public class NewsFragment extends Fragment implements LoaderManager.LoaderCallba
 
     private static RecyclerView.Adapter adapter;
     private static RecyclerView recyclerView;
-    private static ArrayList<News> newsList = new ArrayList<News>();
+    private static ArrayList<News> newsList = new ArrayList<>();
     private RecyclerView.LayoutManager layoutManager;
     private NewsViewModel newsViewModel;
 
     private static final int NEWS_LOADER_ID = 1;
-//    private static final String USGS_REQUEST_URL =
-//            "https://petrsu.ru/rss";
-
-    /*
-    public NewsFragment() {
-        // Required empty public constructor
-    }*/
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        updateRecyclerView();
+    }
+
+    public void updateRecyclerView(){
         newsViewModel = ViewModelProviders.of(this.getActivity()).get(NewsViewModel.class);
 
-        //fetchNewsItems();
         recyclerView = (RecyclerView) this.getActivity().findViewById(R.id.recycle_view_news);
         layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
@@ -58,7 +55,6 @@ public class NewsFragment extends Fragment implements LoaderManager.LoaderCallba
             }
         });
         recyclerView.setAdapter(adapter);
-
     }
 
     @Override
@@ -71,14 +67,16 @@ public class NewsFragment extends Fragment implements LoaderManager.LoaderCallba
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_news, container, false);
 
-
         //((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Новости");
 
-        LoaderManager loaderManager = getLoaderManager();
-        loaderManager.initLoader(NEWS_LOADER_ID, null, this);
-
+        initLoaderManager(NEWS_LOADER_ID);
         return view;
+    }
+
+    public void initLoaderManager(int loaderId){
+        LoaderManager loaderManager = getLoaderManager();
+        loaderManager.initLoader(loaderId, null, this);
     }
 
     @NonNull
@@ -89,56 +87,18 @@ public class NewsFragment extends Fragment implements LoaderManager.LoaderCallba
 
     @Override
     public void onLoadFinished(@NonNull Loader<ArrayList<News>> loader, ArrayList<News> data) {
-
         newsList.clear();
 
         if (data != null && !data.isEmpty()) {
             newsList.addAll(data);
             adapter.notifyDataSetChanged();
         }
-
     }
 
     @Override
     public void onLoaderReset(@NonNull Loader<ArrayList<News>> loader) {
-
         newsList.clear();
         adapter.notifyDataSetChanged();
     }
-
-   /* private void fetchNewsItems(){
-        newsList.add(new News(
-                "titletitletitletitletitletitletitletitle",
-                "descriptriooooooooooooodescriptriooooooooooooo" +
-                        "descriptriooooooooooooodescriptriooooooooooooo" +
-                        "descriptriooooooooooooodescriptriooooooooooooo",
-                "www.ya.ru",
-                "28.04.2020",
-                "image"));
-        newsList.add(new News(
-                "BIG TITLE GOOD NEWS",
-                "description about description",
-                "www.ya.ru",
-                "27.04.2020",
-                "image"));
-        newsList.add(new News(
-                "1BIG TITLE GOOD NEWS",
-                "description about description",
-                "www.ya.ru",
-                "27.04.2020",
-                "image"));
-        newsList.add(new News(
-                "2BIG TITLE GOOD NEWS",
-                "description about description",
-                "www.ya.ru",
-                "27.04.2020",
-                "image"));
-        newsList.add(new News(
-                "3BIG TITLE GOOD NEWS",
-                "description about description",
-                "www.ya.ru",
-                "27.04.2020",
-                "image"));
-    }*/
 }
 

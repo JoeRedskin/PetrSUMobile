@@ -1,4 +1,4 @@
-package com.example.petrsumobile;
+package com.example.petrsumobile.news;
 
 
 import android.content.Context;
@@ -7,13 +7,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.example.petrsumobile.R;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -30,7 +29,6 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.MyViewHolder> 
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
-
         TextView textViewTitle;
         TextView textViewDescription;
         TextView textViewDate;
@@ -68,19 +66,16 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.MyViewHolder> 
         TextView textViewDate = holder.textViewDate;
         ImageView imageView = holder.imageView;
 
-        String formattedDate = formatDate(newsList.get(listPosition).getNewsDate());
+        String formattedDate = formatDate(newsList.get(listPosition).getDate());
 
-        textViewTitle.setText(newsList.get(listPosition).getNewsTitle());
-        textViewDescription.setText(newsList.get(listPosition).getNewsDescription());
+        textViewTitle.setText(newsList.get(listPosition).getTitle());
+        textViewDescription.setText(newsList.get(listPosition).getDescription());
         textViewDate.setText(formattedDate);
-        String imageViewURL = newsList.get(listPosition).getNewsImageURL();
-//        textViewDate.setImageResource(dataSet.get(listPosition).getImage());
+        String imageViewURL = newsList.get(listPosition).getImageUrl();
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*Toast.makeText(view.getContext(), listPosition + " card", Toast.LENGTH_SHORT).show();*/
-
                 AppCompatActivity activity = (AppCompatActivity) view.getContext();
                 activity.getSupportFragmentManager().beginTransaction();
 
