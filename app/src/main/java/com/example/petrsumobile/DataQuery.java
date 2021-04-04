@@ -1,18 +1,17 @@
 package com.example.petrsumobile;
 
 import android.util.Log;
+
 import com.example.petrsumobile.news.News;
 import com.example.petrsumobile.schedule.Schedule;
 import com.example.petrsumobile.schedule.ScheduleWeek;
 import com.example.petrsumobile.schedule.ScheduleWeekType;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -21,7 +20,11 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 
 public class DataQuery {
 
@@ -157,7 +160,7 @@ public class DataQuery {
                         String _description = _descriptionE.getFirstChild().getNodeValue();
                         Date _pubDate = new Date(_pubDateE.getFirstChild().getNodeValue());
                         String _link = _linkE.getFirstChild().getNodeValue();
-                        String _imageULR = _imageURL.getAttribute("url");
+                        String _imageULR = _imageURL.getAttribute("url").replace("http","https");
 
                         News news = new News(_title, _description, _pubDate, _link, _imageULR);
                         newsArrayList.add(news);
