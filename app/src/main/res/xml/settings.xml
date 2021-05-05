@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <EditTextPreference
+        app:key="@string/settings_group_number_key"
+        app:summary="@string/settings_group_number_default"
+        app:title="@string/settings_group_number_label" />
+</PreferenceScreen>

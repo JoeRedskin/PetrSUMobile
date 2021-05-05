@@ -1,57 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             tools:context=".NewsDetailsFragment">
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".NewsDetailsFragment">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+        <ScrollView
+            android:id="@+id/scrollView2"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-        <ScrollView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" android:id="@+id/scrollView2">
             <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
                 <ImageView
-                        android:src="@drawable/ic_placeholder_details"
-                        android:layout_width="0dp"
-                        android:layout_height="270dp" android:id="@+id/imageViewNewsDetails"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintBottom_toTopOf="@+id/textViewDateDetails"
-                        android:scaleType="centerCrop"/>
+                    android:id="@+id/imageViewNewsDetails"
+                    android:layout_width="0dp"
+                    android:layout_height="270dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_placeholder_details"
+                    app:layout_constraintBottom_toTopOf="@+id/textViewDateDetails"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
                 <TextView
-                        android:text="TextView"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content" android:id="@+id/textViewDateDetails"
-                        app:layout_constraintTop_toBottomOf="@+id/imageViewNewsDetails" android:layout_marginTop="7dp"
-                        app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
-                        android:layout_marginEnd="16dp" android:layout_marginStart="16dp"
-                        android:textColor="@color/colorBlackMedium"
-                        app:layout_constraintBottom_toTopOf="@+id/textViewTitleDetails"/>
+                    android:id="@+id/textViewDateDetails"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="7dp"
+                    android:layout_marginEnd="16dp"
+                    android:text="TextView"
+                    android:textColor="@color/colorBlackMedium"
+                    app:layout_constraintBottom_toTopOf="@+id/textViewTitleDetails"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/imageViewNewsDetails" />
+
                 <TextView
-                        android:text="TextView"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content" android:id="@+id/textViewTitleDetails"
-                        app:layout_constraintTop_toBottomOf="@+id/textViewDateDetails"
-                        app:layout_constraintStart_toStartOf="parent" android:layout_marginEnd="16dp"
-                        app:layout_constraintEnd_toEndOf="parent" android:layout_marginStart="16dp"
-                        android:layout_marginTop="7dp"
-                        android:textColor="@color/colorBlack"
-                        app:layout_constraintBottom_toTopOf="@+id/textViewDescriptionDetails" android:textSize="20sp"
-                        android:fontFamily="sans-serif-medium"/>
+                    android:id="@+id/textViewTitleDetails"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="7dp"
+                    android:layout_marginEnd="16dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="TextView"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toTopOf="@+id/textViewDescriptionDetails"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textViewDateDetails" />
+
                 <TextView
-                        android:text="TextView"
-                        android:layout_width="0dp"
-                        android:textColor="@color/colorBlackMedium"
-                        android:layout_height="wrap_content" android:id="@+id/textViewDescriptionDetails"
-                        app:layout_constraintTop_toBottomOf="@+id/textViewTitleDetails" android:layout_marginEnd="16dp"
-                        app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
-                        android:layout_marginStart="16dp" android:layout_marginTop="10dp"
-                        app:layout_constraintBottom_toBottomOf="parent" android:layout_marginBottom="60dp"/>
+                    android:id="@+id/textViewDescriptionDetails"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="60dp"
+                    android:text="TextView"
+                    android:textColor="@color/colorBlackMedium"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textViewTitleDetails" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>
-</FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

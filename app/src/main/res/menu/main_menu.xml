@@ -1,29 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-      xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-        <item
-                android:id="@+id/navigation_news"
-                android:icon="@drawable/ic_news"
-                android:title="@string/title_news"
-                android:enabled="true"
-                app:showAsAction="ifRoom"
-        />
+    <item
+        android:id="@+id/newsFragment"
+        android:enabled="true"
+        android:icon="@drawable/ic_news"
+        android:title="@string/title_news"
+        app:showAsAction="ifRoom" />
 
-        <item
-                android:id="@+id/navigation_schedule"
-                android:icon="@drawable/ic_schedule"
-                android:title="@string/title_schedule"
-                android:enabled="true"
-                app:showAsAction="ifRoom"
-        />
+    <item
+        android:id="@+id/scheduleFragment"
+        android:enabled="true"
+        android:icon="@drawable/ic_schedule"
+        android:title="@string/title_schedule"
+        app:showAsAction="ifRoom" />
 
-        <item
-                android:id="@+id/navigation_university"
-                android:icon="@drawable/ic_university"
-                android:title="@string/title_university"
-                android:enabled="true"
-                app:showAsAction="ifRoom"
-        />
+    <item
+        android:id="@+id/universityFragment"
+        android:enabled="true"
+        android:icon="@drawable/ic_university"
+        android:title="@string/title_university"
+        app:showAsAction="ifRoom" />
 
 </menu>
+
