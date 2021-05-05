@@ -1,13 +1,13 @@
-//package com.example.petrsumobile.schedule
-//
-//import android.os.Bundle
-//import android.preference.Preference
-//import android.preference.Preference.OnPreferenceChangeListener
-//import android.preference.PreferenceFragment
-//import android.preference.PreferenceManager
-//import androidx.appcompat.app.AppCompatActivity
-//import com.example.petrsumobile.R
-//
+package com.example.petrsumobile.schedule
+
+import android.os.Bundle
+import android.preference.Preference
+import android.preference.Preference.OnPreferenceChangeListener
+import android.preference.PreferenceFragment
+import android.preference.PreferenceManager
+import androidx.appcompat.app.AppCompatActivity
+import com.example.petrsumobile.R
+
 //class SettingsActivity : AppCompatActivity() {
 //    override fun onCreate(savedInstanceState: Bundle?) {
 //        super.onCreate(savedInstanceState)

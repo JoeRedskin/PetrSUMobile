@@ -64,7 +64,7 @@
                 android:layout_marginBottom="12dp"
                 android:orientation="vertical"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/showOnMapButton"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/textViewScheduleTimeStart"
                 app:layout_constraintTop_toTopOf="parent">
 
@@ -110,19 +110,6 @@
                     tools:text="Classroom" />
 
             </LinearLayout>
-
-            <ImageButton
-                android:id="@+id/showOnMapButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="12dp"
-                android:layout_weight="1"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_university" />
 
             <View
                 android:id="@+id/lineView"

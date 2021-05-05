@@ -1,9 +1,9 @@
 package com.example.petrsumobile.news
 
-import retrofit2.Call
 import retrofit2.http.GET
+import retrofit2.http.Query
 
 interface NewsService {
-    @GET()
-    fun getNews(): Call<ArrayList<News>>
+    @GET("api.json")
+    suspend fun getNews(@Query("rss_url") cityQuery: String): NewsList
 }

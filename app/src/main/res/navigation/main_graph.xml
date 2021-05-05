@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/main_graph"
+    app:startDestination="@id/scheduleFragment">
+
+    <fragment
+        android:id="@+id/newsFragment"
+        android:name="com.example.petrsumobile.news.NewsFragment"
+        android:label="@string/title_news">
+        <action
+            android:id="@+id/action_newsFragment_to_newsDetailsFragment"
+            app:destination="@id/newsDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/universityFragment"
+        android:name="com.example.petrsumobile.university.UniversityFragment"
+        android:label="@string/title_university" />
+    <fragment
+        android:id="@+id/newsDetailsFragment"
+        android:name="com.example.petrsumobile.news.NewsDetailsFragment"
+        android:label="@string/title_news">
+        <argument
+            android:name="id"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/scheduleFragment"
+        android:name="com.example.petrsumobile.schedule.ScheduleFragment"
+        android:label="@string/title_schedule" >
+        <action
+            android:id="@+id/action_scheduleFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.petrsumobile.schedule.SettingsFragment"
+        android:label="Настройки" />
+</navigation>

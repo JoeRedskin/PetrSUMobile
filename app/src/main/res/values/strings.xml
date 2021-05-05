@@ -12,6 +12,8 @@
     <string name="settings_group_number_label">Номер группы</string>
     <string name="settings_group_number_key" translatable="false">group_number</string>
     <string name="settings_group_number_default" translatable="false">22307</string>
+    <string name="numerator">Числитель</string>
+    <string name="denominator">Знаменатель</string>
 
-<!--    <string name="hello_blank_fragment">Hello blank fragment</string>-->
+    <!--    <string name="hello_blank_fragment">Hello blank fragment</string>-->
 </resources>

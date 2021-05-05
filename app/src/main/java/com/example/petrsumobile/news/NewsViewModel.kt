@@ -1,12 +1,24 @@
 package com.example.petrsumobile.news
 
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import java.util.*
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.launch
 
-class NewsViewModel constructor(
-        private val newsRepository: NewsRepository
+class NewsViewModel(
+        private val repository: NewsRepository
 ) : ViewModel() {
 
-    val newsList = newsRepository.getNews()
+    val newsList = repository.getAllNews()
+
+    fun fetchNews() {
+        viewModelScope.launch {
+            repository.fetchNews()
+        }
+    }
+
+    fun deleteNews() {
+        viewModelScope.launch {
+            repository.deleteNews()
+        }
+    }
 }

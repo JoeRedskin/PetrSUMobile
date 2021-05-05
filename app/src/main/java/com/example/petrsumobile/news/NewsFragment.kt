@@ -4,77 +4,55 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.NavigationUI.setupWithNavController
 import androidx.recyclerview.widget.RecyclerView
+import androidx.room.Room
+import com.example.petrsumobile.NewsDatabase
 import com.example.petrsumobile.R
-import com.example.petrsumobile.news.RetrofitClient.retrofit
+import com.example.petrsumobile.news.NewsRetrofitClient.retrofit
 
 class NewsFragment : Fragment() {
 
-    private lateinit var recyclerView: RecyclerView
-    private lateinit var viewModel: NewsViewModel
-    private val newsList = ArrayList<News>()
-    private val adapter = NewsAdapter(newsList)
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-
-        recyclerView = this.activity!!.findViewById<View>(R.id.recycle_view_news) as RecyclerView
-        viewModel = NewsViewModel(NewsRepository((retrofit)))
-//        adapter = NewsAdapter(activity, newsList) { position, itemNews -> //Toast.makeText(getContext(), position + " card "+ itemNews.getNewsDate(), Toast.LENGTH_SHORT).show();
-//            newsViewModel!!.selectNews(itemNews)
-//        }
-        recyclerView.adapter = adapter
-
-        viewModel.newsList.observe(this) {
-            if (it != null) {
-                if (it.isNotEmpty()) {
-                    citiesList.clear()
-                    citiesList.addAll(it)
-                    updateCityInfo(citiesList[0])
-                    adapter.notifyDataSetChanged()
-                }
-            }
-        }
+    private val recyclerView: RecyclerView by lazy {
+        view?.findViewById<View>(R.id.recycle_view_news) as RecyclerView
     }
+    private lateinit var viewModel: NewsViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_news, container, false)
-
-        //((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-        (activity as AppCompatActivity?)!!.supportActionBar!!.title = "Новости"
-//        initLoaderManager(NEWS_LOADER_ID)
+        val toolbar = view.findViewById<Toolbar>(R.id.toolbar)
+        setupWithNavController(toolbar, findNavController())
         return view
     }
 
-//    fun initLoaderManager(loaderId: Int) {
-//        val loaderManager = loaderManager
-//        loaderManager.initLoader(loaderId, null, this)
-//    }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-//    override fun onCreateLoader(id: Int, args: Bundle?): Loader<ArrayList<News>?> {
-//        return NewsLoader(this.context)
-//    }
+        val adapter = NewsAdapter(object : NewsAdapter.OnItemClickListener {
+            override fun onItemClicked(news: News) {
+                val action = NewsFragmentDirections.actionNewsFragmentToNewsDetailsFragment(news.id)
+                findNavController().navigate(action)
+            }
+        })
+        recyclerView.adapter = adapter
 
-//    override fun onLoadFinished(loader: Loader<ArrayList<News>?>, data: ArrayList<News>?) {
-//        newsList.clear()
-//        if (data != null && !data.isEmpty()) {
-//            newsList.addAll(data)
-//            adapter!!.notifyDataSetChanged()
-//        }
-//    }
+        val db = Room.databaseBuilder(view.context,
+                NewsDatabase::class.java, "populus-database").fallbackToDestructiveMigration().build()
 
-//    override fun onLoaderReset(loader: Loader<ArrayList<News>?>) {
-//        newsList.clear()
-//        adapter!!.notifyDataSetChanged()
-//    }
+        viewModel = ViewModelProvider(this, NewsViewModelFactory(NewsRepository(retrofit, db.newsDao))).get(NewsViewModel::class.java)
 
-    companion object {
-        //        private var adapter: RecyclerView.Adapter<*>? = null
-//        private var recyclerView: RecyclerView? = null
-        private val newsList = ArrayList<News>()
-        private const val NEWS_LOADER_ID = 1
+        viewModel.deleteNews()
+        viewModel.fetchNews()
+        viewModel.newsList.observe(viewLifecycleOwner) {
+            if (!it.isNullOrEmpty()) {
+                adapter.updateList(it)
+                print(it)
+            }
+        }
     }
 }

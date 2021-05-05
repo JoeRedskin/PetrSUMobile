@@ -2,27 +2,37 @@ package com.example.petrsumobile.news
 
 import android.util.Log
 import androidx.lifecycle.LiveData
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
-class NewsRepository constructor(
+class NewsRepository (
         private val newsService: NewsService,
+        private val newsDao: NewsDao
 ) {
 
-    fun getNews(): LiveData<List<News>> {
+    fun getAllNews(): LiveData<List<News>> {
+        return newsDao.getAllNews
+    }
 
-        var newsList = ArrayList<News>()
-        newsService.getNews().enqueue(object : Callback<ArrayList<News>> {
-            override fun onFailure(call: Call<ArrayList<News>>, t: Throwable) {
-                Log.e("TAG", t.message.toString())
-            }
+    fun getNews(id: Int): LiveData<News> {
+        return newsDao.getNews(id)
+    }
 
-            override fun onResponse(call: Call<ArrayList<News>>, response: Response<ArrayList<News>>) {
-                newsList = response.body()!!
-                print(newsList)
-            }
-        })
-        return newsList
+    suspend fun deleteNews() {
+        newsDao.deleteAll()
+    }
+
+    suspend fun fetchNews() {
+        try {
+            Log.d("TAG","Fetch news")
+            val result = newsService.getNews("https://petrsu.ru/rss")
+            Log.d("TAG",result.newsList.toString())
+            newsDao.insertAll(result.newsList)
+
+        } catch (t: Throwable) {
+            Log.e("TAG", t.message.toString())
+        }
+    }
+
+    companion object {
+        const val BASE_SITE = "https://petrsu.ru/rss"
     }
 }
